@@ -1,15 +1,23 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-odkmimamori-dev-112626-authRole",
-      "UnauthRoleArn": "arn:aws:iam::246946350365:role/amplify-odkmimamori-dev-112626-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::246946350365:role/amplify-odkmimamori-dev-112626-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-odkmimamori-dev-112626-deployment",
-      "UnauthRoleName": "amplify-odkmimamori-dev-112626-unauthRole",
-      "StackName": "amplify-odkmimamori-dev-112626",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:246946350365:stack/amplify-odkmimamori-dev-112626/209d27a0-3ae7-11ed-84ca-0a5c025467e9",
-      "AmplifyAppId": "d22hy14464cw19"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-odkmimamori-dev-112626-authRole",
+            "UnauthRoleArn": "arn:aws:iam::246946350365:role/amplify-odkmimamori-dev-112626-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::246946350365:role/amplify-odkmimamori-dev-112626-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-odkmimamori-dev-112626-deployment",
+            "UnauthRoleName": "amplify-odkmimamori-dev-112626-unauthRole",
+            "StackName": "amplify-odkmimamori-dev-112626",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:246946350365:stack/amplify-odkmimamori-dev-112626/209d27a0-3ae7-11ed-84ca-0a5c025467e9",
+            "AmplifyAppId": "d22hy14464cw19"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d22hy14464cw19",
+                    "type": "cicd"
+                }
+            }
+        }
     }
-  }
 }
