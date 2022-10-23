@@ -17,7 +17,7 @@ import {
     Card
 } from "@aws-amplify/ui-react";
 import { useState } from "react";
-import {DeliveryStatusResult} from './types/DeliveryStatusResult';
+import { DeliveryStatusResult } from './types/DeliveryStatusResult';
 
 const DeliveryStatusSearchResult = (props: any) => {
 
@@ -76,6 +76,20 @@ const DeliveryStatusSearchResult = (props: any) => {
 
     return (
         <>
+            <Flex
+                direction="row"
+                justifyContent="flex-start"
+                wrap="nowrap"
+                gap="1rem"
+                width="80%"
+            >
+                <Text
+                    fontSize={"larger"}
+                    fontWeight={"bolder"}
+                    color="black"
+                >検索結果</Text>
+
+            </Flex>
             <Table
                 highlightOnHover={true}
                 variation="striped"

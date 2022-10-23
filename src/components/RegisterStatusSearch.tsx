@@ -21,70 +21,75 @@ import { RegisterStatusResult } from './types/RegisterStatusResult';
 
 const RegisterStatusSearch = (props: any) => {
 
-    const baseItems: RegisterStatusResult[] =[ 
-        { 
+    const ResultMenu = {
+        Nothing: 0,
+        Requested: 1
+    };
+
+    const [menuId,setMenuId] = useState(ResultMenu.Nothing);
+
+    const baseItems: RegisterStatusResult[] = [
+        {
             registerdMail: "hoge@yahoo.co.jp",
             oneUid: "1234567890",
             isPaidUser: true,
-            tags:[
+            registerItems: [
                 {
                     tagName: "MyCar",
-                    mailItems: [
-                        {
-                            deliveryMail:"hoge2@yahoo.co.jp",
-                            isAuthenticated: true
-                        },
-                        {
-                            deliveryMail:"hoge9@yahoo.co.jp",
-                            isAuthenticated: true
-                        },
-                        {
-                            deliveryMail:"hoge3@yahoo.co.jp",
-                            isAuthenticated: false
-                        }
-                    ]
+
+                    deliveryMail: "hoge2@yahoo.co.jp",
+                    isAuthenticated: true
+                },
+                {
+                    tagName: "MyCar",
+                    deliveryMail: "hoge9@yahoo.co.jp",
+                    isAuthenticated: true
+                },
+                {
+                    tagName: "MyCar",
+                    deliveryMail: "hoge3@yahoo.co.jp",
+                    isAuthenticated: false
+                }
+
+                ,
+                {
+                    tagName: "Kids",
+                    deliveryMail: "kids1@yahoo.co.jp",
+                    isAuthenticated: false
                 },
                 {
                     tagName: "Kids",
-                    mailItems: [
-                        {
-                            deliveryMail:"kids1@yahoo.co.jp",
-                            isAuthenticated: false
-                        },
-                        {
-                            deliveryMail:"kids9@yahoo.co.jp",
-                            isAuthenticated: true
-                        },
-                        {
-                            deliveryMail:"kids1234@yahoo.co.jp",
-                            isAuthenticated: false
-                        }
-                    ]
+                    deliveryMail: "kids9@yahoo.co.jp",
+                    isAuthenticated: true
+                },
+                {
+                    tagName: "Kids",
+                    deliveryMail: "kids1234@yahoo.co.jp",
+                    isAuthenticated: false
+                }
+                ,
+                {
+                    tagName: "Wallet",
+                    deliveryMail: "wallet@yahoo.co.jp",
+                    isAuthenticated: true
                 },
                 {
                     tagName: "Wallet",
-                    mailItems: [
-                        {
-                            deliveryMail:"wallet@yahoo.co.jp",
-                            isAuthenticated: true
-                        },
-                        {
-                            deliveryMail:"wallet2@yahoo.co.jp",
-                            isAuthenticated: false
-                        },
-                        {
-                            deliveryMail:"wallet3@yahoo.co.jp",
-                            isAuthenticated: false
-                        }
-                    ]
+                    deliveryMail: "wallet2@yahoo.co.jp",
+                    isAuthenticated: false
                 },
+                {
+                    tagName: "Wallet",
+                    deliveryMail: "wallet3@yahoo.co.jp",
+                    isAuthenticated: false
+                }
             ]
         }
     ];
 
     const emptyItem: RegisterStatusResult[] = []
 
-    let [items, setItems] = useState(emptyItem);
+    const [items, setItems] = useState(emptyItem);
 
     const request = () => {
         const val = document.getElementById("mail") as HTMLInputElement;
@@ -92,8 +97,8 @@ const RegisterStatusSearch = (props: any) => {
         let tmp = [...baseItems].filter(x => {
             return x.registerdMail == val.value;
         });
-        console.log(tmp);
         setItems(() => tmp);
+        setMenuId(ResultMenu.Requested);
     }
 
     return (
@@ -140,32 +145,13 @@ const RegisterStatusSearch = (props: any) => {
                     onClick={request}>検索</Button>
             </Flex>
 
-            <Flex
-                direction="row"
-                justifyContent="flex-start"
-                wrap="nowrap"
-                gap="1rem"
-                width="80%"
-            >
-                <Text
-                    fontSize={"larger"}
-                    fontWeight={"bolder"}
-                    color="black"
-                >検索結果</Text>
-
-            </Flex>
-            <Flex
-                direction="row"
-                justifyContent="flex-start"
-                wrap="nowrap"
-                gap="1rem"
-                width="80%"
-            >
-            <RegisterStatusSearchResult
+            {   
+                menuId == ResultMenu.Requested && 
+                <RegisterStatusSearchResult
                 items={items[0]}
                 setItems={setItems}
-            />
-            </Flex>
+            />}
+
         </>
     );
 }

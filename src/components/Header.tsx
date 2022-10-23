@@ -9,10 +9,13 @@ import {
     View,
     Image
 } from "@aws-amplify/ui-react";
+import { useState } from "react";
 
 import "./css/header.css";
 
 const Header = (props: any) => {
+
+    console.log(props)
 
     return (
         <Flex
@@ -31,7 +34,7 @@ const Header = (props: any) => {
 
             <Link
                 className="header-menu"
-                href="https://www.yahoo.co.jp"
+                onClick={()=>{props.setMenuId(props.menu.RegisterMenu)}}
                 color="#000"
             >
                 登録状況確認
@@ -45,7 +48,7 @@ const Header = (props: any) => {
             />
             <Link
                 className="header-menu"
-                href="https://www.yahoo.co.jp"
+                onClick={()=>{props.setMenuId(props.menu.DeliveryMenu)}}
                 color="#000"
             >
                 配信状況確認

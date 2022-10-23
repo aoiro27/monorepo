@@ -21,6 +21,13 @@ import { DeliveryStatusResult } from './types/DeliveryStatusResult';
 
 const DeliveryStatusSearch = (props: any) => {
 
+    const ResultMenu = {
+        Nothing: 0,
+        Requested: 1
+    };
+
+    const [menuId, setMenuId] = useState(ResultMenu.Nothing);
+
     const baseItems: DeliveryStatusResult[] = [
         { mail: "hoge1@yahoo.co.jp", timestamp: "2022-09-18 10:22:30", station: "新宿", tag: "MyCar" },
         { mail: "hoge3@yahoo.co.jp", timestamp: "2022-09-20 11:22:10", station: "守谷", tag: "MyCar" },
@@ -33,15 +40,16 @@ const DeliveryStatusSearch = (props: any) => {
 
     const emptyItem: DeliveryStatusResult[] = []
 
-    let [items,setItems] = useState(emptyItem);
-  
+    let [items, setItems] = useState(emptyItem);
+
     const request = () => {
         const val = document.getElementById("mail") as HTMLInputElement;
-            
+
         let tmp = [...baseItems].filter(x => {
             return x.mail == val.value;
         });
-        setItems(()=>tmp);
+        setItems(() => tmp);
+        setMenuId(ResultMenu.Requested);
     }
 
     return (
@@ -120,25 +128,13 @@ const DeliveryStatusSearch = (props: any) => {
                 className='search'
                 onClick={request}>検索</Button>
 
-            <Flex
-                direction="row"
-                justifyContent="flex-start"
-                wrap="nowrap"
-                gap="1rem"
-                width="80%"
-            >
-                <Text
-                    fontSize={"larger"}
-                    fontWeight={"bolder"}
-                    color="black"
-                >検索結果</Text>
-
-            </Flex>
-
-            <DeliveryStatusSearchResult
-                items={items}
-                setItems={setItems}
-            />
+            {
+                menuId == ResultMenu.Requested &&
+                <DeliveryStatusSearchResult
+                    items={items}
+                    setItems={setItems}
+                />
+            }
         </>
     );
 }

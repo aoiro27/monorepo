@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Amplify } from "aws-amplify";
 import {
   AmplifyProvider,
@@ -21,6 +21,16 @@ import RegisterStatusSearch from './components/RegisterStatusSearch';
 Amplify.configure(aws_exports);
 
 const App = () => {
+
+  const Menu = {
+    Nothing: 0,
+    DeliveryMenu: 1,
+    RegisterMenu: 2,
+  };
+
+  // 最初は何も表示しない
+  const [menuId, setMenuId] = useState(Menu.Nothing);
+
   return (
     <AmplifyProvider theme={theme}>
       <Authenticator>
@@ -34,9 +44,15 @@ const App = () => {
             gap="1rem"
             textAlign="center"
           >
-            <Header className="header" signOut={signOut} />
-    
-            <RegisterStatusSearch />
+            <Header
+              className="header"
+              signOut={signOut}
+              setMenuId={setMenuId}
+              menu={Menu}
+            />
+
+            {menuId == Menu.RegisterMenu && <RegisterStatusSearch />}
+            {menuId == Menu.DeliveryMenu && <DeliveryStatusSearch />}
 
           </Flex>
         )}
