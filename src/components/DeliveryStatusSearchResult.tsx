@@ -17,29 +17,19 @@ import {
     Card
 } from "@aws-amplify/ui-react";
 import { useState } from "react";
-
-type resultItem = {
-    mail: string;
-    timestamp: string;
-    station: string;
-    tag: string;
-};
+import {DeliveryStatusResult} from './types/DeliveryStatusResult';
 
 const DeliveryStatusSearchResult = (props: any) => {
 
-    let [items,setItem] = useState([...props.items]);
-    const [mailToggle,setMailToggle] = useState(true);
-    const [timestampToggle,setTimestampToggle] = useState(true);
-    const [stationToggle,setStationToggle] = useState(true);
-    const [tagToggle,setTagToggle] = useState(true);
-
-    console.log(props);
-    console.log(items);
+    const [mailToggle, setMailToggle] = useState(true);
+    const [timestampToggle, setTimestampToggle] = useState(true);
+    const [stationToggle, setStationToggle] = useState(true);
+    const [tagToggle, setTagToggle] = useState(true);
 
     const sortMail = () => {
         setMailToggle(!mailToggle);
-         setItem( 
-             items.sort((a: resultItem, b: resultItem) => {
+        props.setItems(
+            props.items.sort((a: DeliveryStatusResult, b: DeliveryStatusResult) => {
                 if (mailToggle) {
                     return (a.mail >= b.mail) ? -1 : 1
                 } else {
@@ -50,8 +40,8 @@ const DeliveryStatusSearchResult = (props: any) => {
 
     const sortTimestamp = () => {
         setTimestampToggle(!timestampToggle);
-         setItem( 
-             items.sort((a: resultItem, b: resultItem) => {
+        props.setItem(
+            props.items.sort((a: DeliveryStatusResult, b: DeliveryStatusResult) => {
                 if (timestampToggle) {
                     return (a.timestamp >= b.timestamp) ? -1 : 1
                 } else {
@@ -62,8 +52,8 @@ const DeliveryStatusSearchResult = (props: any) => {
 
     const sortStation = () => {
         setStationToggle(!stationToggle);
-         setItem( 
-             items.sort((a: resultItem, b: resultItem) => {
+        props.setItem(
+            props.items.sort((a: DeliveryStatusResult, b: DeliveryStatusResult) => {
                 if (stationToggle) {
                     return (a.station >= b.station) ? -1 : 1
                 } else {
@@ -74,8 +64,8 @@ const DeliveryStatusSearchResult = (props: any) => {
 
     const sortTag = () => {
         setTagToggle(!tagToggle);
-         setItem( 
-             items.sort((a: resultItem, b: resultItem) => {
+        props.setItem(
+            props.items.sort((a: DeliveryStatusResult, b: DeliveryStatusResult) => {
                 if (tagToggle) {
                     return (a.tag >= b.tag) ? -1 : 1
                 } else {
@@ -104,7 +94,7 @@ const DeliveryStatusSearchResult = (props: any) => {
 
 
                 <TableBody>
-                    {items.map((item: resultItem) => {
+                    {props.items.map((item: DeliveryStatusResult) => {
                         return (
                             <TableRow>
                                 <TableCell>{item.mail}</TableCell>

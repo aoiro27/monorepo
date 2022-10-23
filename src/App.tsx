@@ -16,6 +16,7 @@ import "@aws-amplify/ui-react/styles.css";
 import theme from "./theme";
 import Header from './components/Header';
 import DeliveryStatusSearch from './components/DeliveryStatusSearch';
+import RegisterStatusSearch from './components/RegisterStatusSearch';
 
 Amplify.configure(aws_exports);
 
@@ -35,7 +36,7 @@ const App = () => {
           >
             <Header className="header" signOut={signOut} />
     
-            <DeliveryStatusSearch />
+            <RegisterStatusSearch />
 
           </Flex>
         )}

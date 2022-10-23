@@ -23,7 +23,7 @@ const Header = (props: any) => {
         >
             <Image
                 alt="登録状況確認"
-                src="./img/a.png"
+                src="./img/register-status-confirm.png"
                 objectFit="initial"
                 backgroundColor="initial"
                 opacity="100%"

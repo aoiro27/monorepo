@@ -16,16 +16,12 @@ import {
 } from "@aws-amplify/ui-react";
 
 import "./css/delivery-status-search.css"
+import "./types/DeliveryStatusResult";
+import { DeliveryStatusResult } from './types/DeliveryStatusResult';
 
-type resultItem = {
-    mail: string;
-    timestamp: string;
-    station: string;
-    tag: string;
-};
 const DeliveryStatusSearch = (props: any) => {
 
-    const baseItems: resultItem[] = [
+    const baseItems: DeliveryStatusResult[] = [
         { mail: "hoge1@yahoo.co.jp", timestamp: "2022-09-18 10:22:30", station: "新宿", tag: "MyCar" },
         { mail: "hoge3@yahoo.co.jp", timestamp: "2022-09-20 11:22:10", station: "守谷", tag: "MyCar" },
         { mail: "hoge5@yahoo.co.jp", timestamp: "2022-09-21 10:22:30", station: "新宿", tag: "Kids" },
@@ -35,7 +31,7 @@ const DeliveryStatusSearch = (props: any) => {
         { mail: "hoge1@yahoo.co.jp", timestamp: "2022-10-02 10:22:30", station: "新宿", tag: "MyCar" },
     ];
 
-    const emptyItem: resultItem[] = []
+    const emptyItem: DeliveryStatusResult[] = []
 
     let [items,setItems] = useState(emptyItem);
   
@@ -46,8 +42,6 @@ const DeliveryStatusSearch = (props: any) => {
             return x.mail == val.value;
         });
         setItems(()=>tmp);
-        console.log(tmp);
-        console.log(items);
     }
 
     return (
@@ -143,6 +137,7 @@ const DeliveryStatusSearch = (props: any) => {
 
             <DeliveryStatusSearchResult
                 items={items}
+                setItems={setItems}
             />
         </>
     );
