@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Amplify } from "aws-amplify";
+import {
+  AmplifyProvider,
+  Authenticator,
+  Button,
+  Flex,
+  Link,
+  Text,
+  TextField,
+  View,
+} from "@aws-amplify/ui-react";
+import aws_exports from "./aws-exports";
 
-function App() {
+import "@aws-amplify/ui-react/styles.css";
+import theme from "./theme";
+import Header from './components/Header';
+import DeliveryStatusSearch from './components/DeliveryStatusSearch';
+
+Amplify.configure(aws_exports);
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AmplifyProvider theme={theme}>
+      <Authenticator>
+        {({ signOut, user }) => (
+          <Flex
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="center"
+            alignContent="flex-start"
+            wrap="nowrap"
+            gap="1rem"
+            textAlign="center"
+          >
+            <Header className="header" signOut={signOut} />
+    
+            <DeliveryStatusSearch />
+
+          </Flex>
+        )}
+      </Authenticator>
+    </AmplifyProvider>
   );
-}
+};
 
 export default App;

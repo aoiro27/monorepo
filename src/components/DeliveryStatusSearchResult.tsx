@@ -1,0 +1,123 @@
+import {
+    AmplifyProvider,
+    Authenticator,
+    Button,
+    Flex,
+    Link,
+    Text,
+    Table,
+    TableCell,
+    TableBody,
+    TableHead,
+    TableRow,
+    TextField,
+    View,
+    Image,
+    Grid,
+    Card
+} from "@aws-amplify/ui-react";
+import { useState } from "react";
+
+type resultItem = {
+    mail: string;
+    timestamp: string;
+    station: string;
+    tag: string;
+};
+
+const DeliveryStatusSearchResult = (props: any) => {
+
+    let [items,setItem] = useState([...props.items]);
+    const [mailToggle,setMailToggle] = useState(true);
+    const [timestampToggle,setTimestampToggle] = useState(true);
+    const [stationToggle,setStationToggle] = useState(true);
+    const [tagToggle,setTagToggle] = useState(true);
+
+    console.log(props);
+    console.log(items);
+
+    const sortMail = () => {
+        setMailToggle(!mailToggle);
+         setItem( 
+             items.sort((a: resultItem, b: resultItem) => {
+                if (mailToggle) {
+                    return (a.mail >= b.mail) ? -1 : 1
+                } else {
+                    return (a.mail <= b.mail) ? -1 : 1
+                }
+            }));
+    }
+
+    const sortTimestamp = () => {
+        setTimestampToggle(!timestampToggle);
+         setItem( 
+             items.sort((a: resultItem, b: resultItem) => {
+                if (timestampToggle) {
+                    return (a.timestamp >= b.timestamp) ? -1 : 1
+                } else {
+                    return (a.timestamp <= b.timestamp) ? -1 : 1
+                }
+            }));
+    }
+
+    const sortStation = () => {
+        setStationToggle(!stationToggle);
+         setItem( 
+             items.sort((a: resultItem, b: resultItem) => {
+                if (stationToggle) {
+                    return (a.station >= b.station) ? -1 : 1
+                } else {
+                    return (a.station <= b.station) ? -1 : 1
+                }
+            }));
+    }
+
+    const sortTag = () => {
+        setTagToggle(!tagToggle);
+         setItem( 
+             items.sort((a: resultItem, b: resultItem) => {
+                if (tagToggle) {
+                    return (a.tag >= b.tag) ? -1 : 1
+                } else {
+                    return (a.tag <= b.tag) ? -1 : 1
+                }
+            }));
+    }
+
+    return (
+        <>
+            <Table
+                highlightOnHover={true}
+                variation="striped"
+                size="small"
+                backgroundColor={"white"}
+                width="70%"
+            >
+                <TableHead>
+                    <TableRow>
+                        <TableCell as="th" onClick={sortMail}>配信メールアドレス</TableCell>
+                        <TableCell as="th" onClick={sortTimestamp}>日時</TableCell>
+                        <TableCell as="th" onClick={sortStation}>駅名</TableCell>
+                        <TableCell as="th" onClick={sortTag}>タグ名</TableCell>
+                    </TableRow>
+                </TableHead>
+
+
+                <TableBody>
+                    {items.map((item: resultItem) => {
+                        return (
+                            <TableRow>
+                                <TableCell>{item.mail}</TableCell>
+                                <TableCell>{item.timestamp}</TableCell>
+                                <TableCell>{item.station}</TableCell>
+                                <TableCell>{item.tag}</TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
+        </>
+    );
+}
+
+export default DeliveryStatusSearchResult;
