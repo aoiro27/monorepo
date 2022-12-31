@@ -42,7 +42,41 @@ const DeliveryStatusSearch = (props: any) => {
 
     let [items, setItems] = useState(emptyItem);
 
+    const [emailError, setEmailError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+
+    const validate = (mail: string,from: string,to: string) => {
+        console.log(errorMsg);
+        const pattern = /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
+
+        let isValidate = true;
+
+        if (pattern.test(mail)) {
+            setEmailError(false);
+         } else {
+            setEmailError(true);
+            setErrorMsg("正しいメールアドレス形式で入力してください");
+            isValidate = false;
+        }
+
+        if(from === "" ||to === ""){
+            setErrorMsg("期間は入力必須です");
+            isValidate = false;
+        }
+
+        return isValidate;
+    }
+
     const request = () => {
+        
+        const mail = (document.getElementById("mail") as HTMLInputElement).value;
+        const from = (document.getElementById("from") as HTMLInputElement).value;
+        const to = (document.getElementById("to") as HTMLInputElement).value;
+
+        if(!validate(mail,from,to)){
+            return;
+        }
+        
         const val = document.getElementById("mail") as HTMLInputElement;
 
         let tmp = [...baseItems].filter(x => {
@@ -99,6 +133,7 @@ const DeliveryStatusSearch = (props: any) => {
                         label="メールアドレス"
                         labelHidden={true}
                         backgroundColor="white"
+                        hasError={emailError}
                     />
                 </View>
                 <Text
@@ -111,7 +146,7 @@ const DeliveryStatusSearch = (props: any) => {
                 >
                     期間
                 </Text>
-                <input type="date" />
+                <input type="date" id="from"/>
                 <Text
                     variation="primary"
                     as="p"
@@ -122,12 +157,21 @@ const DeliveryStatusSearch = (props: any) => {
                 >
                     ～
                 </Text>
-                <input type="date" />
+                <input type="date" id="to"/>
             </Grid>
             <Button
                 className='search'
                 onClick={request}>検索</Button>
-
+            <Text
+                    variation="error"
+                    as="p"
+                    color="red"
+                    fontSize="1em"
+                    fontStyle="normal"
+                    textDecoration="none"
+                >
+                    {errorMsg}
+                </Text>
             {
                 menuId == ResultMenu.Requested &&
                 <DeliveryStatusSearchResult
