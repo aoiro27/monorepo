@@ -46,7 +46,6 @@ const DeliveryStatusSearch = (props: any) => {
     const [errorMsg, setErrorMsg] = useState("");
 
     const validate = (mail: string,from: string,to: string) => {
-        console.log(errorMsg);
         const pattern = /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
 
         let isValidate = true;
@@ -67,23 +66,34 @@ const DeliveryStatusSearch = (props: any) => {
         return isValidate;
     }
 
-    const request = () => {
+    const request = async () => {
         
         const mail = (document.getElementById("mail") as HTMLInputElement).value;
-        const from = (document.getElementById("from") as HTMLInputElement).value;
-        const to = (document.getElementById("to") as HTMLInputElement).value;
+        const from = (document.getElementById("from") as HTMLInputElement).value?.replaceAll("-","");
+        const to = (document.getElementById("to") as HTMLInputElement).value?.replaceAll("-","");
 
         if(!validate(mail,from,to)){
             return;
         }
-        
-        const val = document.getElementById("mail") as HTMLInputElement;
-
-        let tmp = [...baseItems].filter(x => {
-            return x.mail == val.value;
+        setErrorMsg("");
+        const url = `${process.env.REACT_APP_API_BASE}deliverystatus?email=${mail}&from=${from}&to=${to}`;
+        console.log(url);
+        fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(new Error('エラーです！'));
+          }
+        })
+        .then(json => {
+            console.log(json);
+            setItems(() => json);
+            setMenuId(ResultMenu.Requested);
+        })
+        .catch(e => {
+          console.log(e.message);
         });
-        setItems(() => tmp);
-        setMenuId(ResultMenu.Requested);
     }
 
     return (

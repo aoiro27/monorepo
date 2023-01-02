@@ -92,13 +92,27 @@ const RegisterStatusSearch = (props: any) => {
     const [items, setItems] = useState(emptyItem);
 
     const request = () => {
-        const val = document.getElementById("mail") as HTMLInputElement;
+        const mail = (document.getElementById("mail") as HTMLInputElement).value;
 
-        let tmp = [...baseItems].filter(x => {
-            return x.registerdMail == val.value;
+        const url = `${process.env.REACT_APP_API_BASE}registerstatus/${mail}`;
+        console.log(url);
+        fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(new Error('エラーです！'));
+          }
+        })
+        .then(json => {
+            console.log(json);
+            setItems(() => json);
+            setMenuId(ResultMenu.Requested);
+        })
+        .catch(e => {
+          console.log(e.message);
         });
-        setItems(() => tmp);
-        setMenuId(ResultMenu.Requested);
+
     }
 
     return (
