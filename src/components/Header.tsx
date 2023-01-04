@@ -15,8 +15,6 @@ import "./css/header.css";
 
 const Header = (props: any) => {
 
-    console.log(props)
-
     return (
         <Flex
             direction="row"
