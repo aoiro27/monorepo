@@ -26,79 +26,56 @@ const RegisterStatusSearch = (props: any) => {
         Requested: 1
     };
 
-    const [menuId,setMenuId] = useState(ResultMenu.Nothing);
+    const [menuId, setMenuId] = useState(ResultMenu.Nothing);
 
-    const baseItems: RegisterStatusResult[] = [
-        {
-            registerdMail: "hoge@yahoo.co.jp",
-            oneUid: "1234567890",
-            isPaidUser: true,
-            registerItems: [
-                {
-                    tagName: "MyCar",
+    const [items, setItems] = useState([]);
+    const [emailError, setEmailError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
-                    deliveryMail: "hoge2@yahoo.co.jp",
-                    isAuthenticated: true
-                },
-                {
-                    tagName: "MyCar",
-                    deliveryMail: "hoge9@yahoo.co.jp",
-                    isAuthenticated: true
-                },
-                {
-                    tagName: "MyCar",
-                    deliveryMail: "hoge3@yahoo.co.jp",
-                    isAuthenticated: false
-                }
+    const validate = (mail: string) => {
+        const pattern = /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
 
-                ,
-                {
-                    tagName: "Kids",
-                    deliveryMail: "kids1@yahoo.co.jp",
-                    isAuthenticated: false
-                },
-                {
-                    tagName: "Kids",
-                    deliveryMail: "kids9@yahoo.co.jp",
-                    isAuthenticated: true
-                },
-                {
-                    tagName: "Kids",
-                    deliveryMail: "kids1234@yahoo.co.jp",
-                    isAuthenticated: false
-                }
-                ,
-                {
-                    tagName: "Wallet",
-                    deliveryMail: "wallet@yahoo.co.jp",
-                    isAuthenticated: true
-                },
-                {
-                    tagName: "Wallet",
-                    deliveryMail: "wallet2@yahoo.co.jp",
-                    isAuthenticated: false
-                },
-                {
-                    tagName: "Wallet",
-                    deliveryMail: "wallet3@yahoo.co.jp",
-                    isAuthenticated: false
-                }
-            ]
+        let isValidate = true;
+
+        if (pattern.test(mail)) {
+            setEmailError(false);
+        } else {
+            setEmailError(true);
+            setErrorMsg("正しいメールアドレス形式で入力してください");
+            isValidate = false;
         }
-    ];
 
-    const emptyItem: RegisterStatusResult[] = []
-
-    const [items, setItems] = useState(emptyItem);
+        return isValidate;
+    }
 
     const request = () => {
-        const val = document.getElementById("mail") as HTMLInputElement;
+        const mail = (document.getElementById("mail") as HTMLInputElement).value;
 
-        let tmp = [...baseItems].filter(x => {
-            return x.registerdMail == val.value;
-        });
-        setItems(() => tmp);
-        setMenuId(ResultMenu.Requested);
+        if (!validate(mail)) {
+            return;
+        }
+        setErrorMsg("");
+
+        const url = `${process.env.REACT_APP_API_BASE}registerstatus/${mail}`;
+        console.log(url);
+
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return Promise.reject(new Error('エラーです！'));
+                }
+            })
+            .then(json => {
+                console.log(json);
+                setItems(() => json);
+                setMenuId(ResultMenu.Requested);
+            })
+            .catch(e => {
+                console.log(e.message);
+            });
+
     }
 
     return (
@@ -139,18 +116,29 @@ const RegisterStatusSearch = (props: any) => {
                     backgroundColor="white"
                     width="350px"
                     opacity="100%"
+                    hasError={emailError}
                 />
                 <Button
                     className='search'
                     onClick={request}>検索</Button>
             </Flex>
+            <Text
+                    variation="error"
+                    as="p"
+                    color="red"
+                    fontSize="1em"
+                    fontStyle="normal"
+                    textDecoration="none"
+                >
+                    {errorMsg}
+                </Text>
 
-            {   
-                menuId == ResultMenu.Requested && 
+            {
+                menuId == ResultMenu.Requested &&
                 <RegisterStatusSearchResult
-                items={items[0]}
-                setItems={setItems}
-            />}
+                    items={items}
+                    setItems={setItems}
+                />}
 
         </>
     );

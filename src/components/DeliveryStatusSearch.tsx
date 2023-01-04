@@ -42,14 +42,58 @@ const DeliveryStatusSearch = (props: any) => {
 
     let [items, setItems] = useState(emptyItem);
 
-    const request = () => {
-        const val = document.getElementById("mail") as HTMLInputElement;
+    const [emailError, setEmailError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
-        let tmp = [...baseItems].filter(x => {
-            return x.mail == val.value;
+    const validate = (mail: string,from: string,to: string) => {
+        const pattern = /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
+
+        let isValidate = true;
+
+        if (pattern.test(mail)) {
+            setEmailError(false);
+         } else {
+            setEmailError(true);
+            setErrorMsg("正しいメールアドレス形式で入力してください");
+            isValidate = false;
+        }
+
+        if(from === "" ||to === ""){
+            setErrorMsg("期間は入力必須です");
+            isValidate = false;
+        }
+
+        return isValidate;
+    }
+
+    const request = async () => {
+        
+        const mail = (document.getElementById("mail") as HTMLInputElement).value;
+        const from = (document.getElementById("from") as HTMLInputElement).value?.replaceAll("-","");
+        const to = (document.getElementById("to") as HTMLInputElement).value?.replaceAll("-","");
+
+        if(!validate(mail,from,to)){
+            return;
+        }
+        setErrorMsg("");
+        const url = `${process.env.REACT_APP_API_BASE}deliverystatus?email=${mail}&from=${from}&to=${to}`;
+        console.log(url);
+        fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(new Error('エラーです！'));
+          }
+        })
+        .then(json => {
+            console.log(json);
+            setItems(() => json);
+            setMenuId(ResultMenu.Requested);
+        })
+        .catch(e => {
+          console.log(e.message);
         });
-        setItems(() => tmp);
-        setMenuId(ResultMenu.Requested);
     }
 
     return (
@@ -99,6 +143,7 @@ const DeliveryStatusSearch = (props: any) => {
                         label="メールアドレス"
                         labelHidden={true}
                         backgroundColor="white"
+                        hasError={emailError}
                     />
                 </View>
                 <Text
@@ -111,7 +156,7 @@ const DeliveryStatusSearch = (props: any) => {
                 >
                     期間
                 </Text>
-                <input type="date" />
+                <input type="date" id="from"/>
                 <Text
                     variation="primary"
                     as="p"
@@ -122,12 +167,21 @@ const DeliveryStatusSearch = (props: any) => {
                 >
                     ～
                 </Text>
-                <input type="date" />
+                <input type="date" id="to"/>
             </Grid>
             <Button
                 className='search'
                 onClick={request}>検索</Button>
-
+            <Text
+                    variation="error"
+                    as="p"
+                    color="red"
+                    fontSize="1em"
+                    fontStyle="normal"
+                    textDecoration="none"
+                >
+                    {errorMsg}
+                </Text>
             {
                 menuId == ResultMenu.Requested &&
                 <DeliveryStatusSearchResult

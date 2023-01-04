@@ -27,7 +27,7 @@ const RegisterStatusSearchResult = (props: any) => {
 
     return (
         <>
-                    <Flex
+            <Flex
                 direction="row"
                 justifyContent="flex-start"
                 wrap="nowrap"
@@ -66,9 +66,9 @@ const RegisterStatusSearchResult = (props: any) => {
 
                     <TableBody>
                         <TableRow>
-                            <TableCell>{props.items?.registerdMail}</TableCell>
-                            <TableCell>{props.items?.oneUid}</TableCell>
-                            <TableCell>{props.items?.isPaidUser ? "有償" : "フリー"}</TableCell>
+                            <TableCell>{props.items?.registerdMail ? props.items?.registerdMail : "未登録"}</TableCell>
+                            <TableCell>{props.items?.oneUid ? props.items?.oneUid : "-"}</TableCell>
+                            <TableCell>{props.items?.isPaidUser ? props.items?.isPaidUser ? "有償" : "フリー" : "-"}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -88,8 +88,8 @@ const RegisterStatusSearchResult = (props: any) => {
                 <Text
                     color="black"
                 >{Array.from(
-                    new Map(props.items?.registerItems.map((x:RegisterItem) => [x.tagName,x.tagName])).values()
-                  ).length}件</Text>
+                    new Map(props.items?.registerItems.map((x: RegisterItem) => [x.deliveryMail, x.deliveryMail])).values()
+                ).length}件</Text>
             </Flex>
 
             <Flex
@@ -111,19 +111,19 @@ const RegisterStatusSearchResult = (props: any) => {
                             <TableCell as="th">タグ名</TableCell>
                             <TableCell as="th">配信メールアドレス</TableCell>
                             <TableCell as="th">認証ステータス</TableCell>
-                   </TableRow>
+                        </TableRow>
                     </TableHead>
 
 
                     <TableBody>
-                        {props.items?.registerItems?.map((item: RegisterItem) => {
+                        {props.items?.registerItems?.map((item: RegisterItem,index:React.Key) => {
                             const tagName = prevTagName == item.tagName ? "" : item.tagName;
                             prevTagName = item.tagName;
                             return (
-                                <TableRow>
+                                <TableRow key={index}>
                                     <TableCell>{tagName}</TableCell>
                                     <TableCell>{item.deliveryMail}</TableCell>
-                                    <TableCell>{item.isAuthenticated?"認証済み":"未認証"}</TableCell>
+                                    <TableCell>{item.isAuthenticated ? "認証済み" : "未認証"}</TableCell>
                                 </TableRow>
                             );
                         })}

@@ -108,9 +108,9 @@ const DeliveryStatusSearchResult = (props: any) => {
 
 
                 <TableBody>
-                    {props.items.map((item: DeliveryStatusResult) => {
+                    {props.items.map((item: DeliveryStatusResult,index:React.Key) => {
                         return (
-                            <TableRow>
+                            <TableRow key={index}>
                                 <TableCell>{item.mail}</TableCell>
                                 <TableCell>{item.timestamp}</TableCell>
                                 <TableCell>{item.station}</TableCell>
