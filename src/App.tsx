@@ -29,6 +29,9 @@ const App = () => {
   .then(json => {
     console.log(json)
     console.log(process.env.REACT_APP_IPWHITELIST)
+    if(json.ip != process.env.REACT_APP_IPWHITELIST){
+      window.location.href = "https://dummy.co.jp"
+    }
   })
   }
   const Menu = {
