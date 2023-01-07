@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { Amplify } from "aws-amplify";
+import React, { useState } from 'react'
+import { Amplify } from 'aws-amplify'
 import {
   AmplifyProvider,
   Authenticator,
@@ -9,27 +9,36 @@ import {
   Text,
   TextField,
   View,
-} from "@aws-amplify/ui-react";
-import aws_exports from "./aws-exports";
+} from '@aws-amplify/ui-react'
+import aws_exports from './aws-exports'
 
-import "@aws-amplify/ui-react/styles.css";
-import theme from "./theme";
-import Header from './components/Header';
-import DeliveryStatusSearch from './components/DeliveryStatusSearch';
-import RegisterStatusSearch from './components/RegisterStatusSearch';
+import '@aws-amplify/ui-react/styles.css'
+import theme from './theme'
+import Header from './components/Header'
+import DeliveryStatusSearch from './components/DeliveryStatusSearch'
+import RegisterStatusSearch from './components/RegisterStatusSearch'
 
-Amplify.configure(aws_exports);
+Amplify.configure(aws_exports)
 
 const App = () => {
 
+  if(typeof process.env.REACT_APP_IPWHITELIST !== 'undefined'){
+  
+  fetch('https://ipinfo.io?callback')
+  .then(res => res.json())
+  .then(json => {
+    console.log(json)
+    console.log(process.env.REACT_APP_IPWHITELIST)
+  })
+  }
   const Menu = {
     Nothing: 0,
     DeliveryMenu: 1,
     RegisterMenu: 2,
-  };
+  }
 
   // 最初は何も表示しない
-  const [menuId, setMenuId] = useState(Menu.Nothing);
+  const [menuId, setMenuId] = useState(Menu.Nothing)
 
   return (
     <AmplifyProvider theme={theme}>
@@ -53,12 +62,11 @@ const App = () => {
 
             {menuId == Menu.RegisterMenu && <RegisterStatusSearch />}
             {menuId == Menu.DeliveryMenu && <DeliveryStatusSearch />}
-
           </Flex>
         )}
       </Authenticator>
     </AmplifyProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
