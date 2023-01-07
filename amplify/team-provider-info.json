@@ -22,5 +22,29 @@
         "odkmimamori8a6c148d": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-odkmimamori-prod-163123-authRole",
+      "UnauthRoleArn": "arn:aws:iam::667495032181:role/amplify-odkmimamori-prod-163123-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::667495032181:role/amplify-odkmimamori-prod-163123-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-odkmimamori-prod-163123-deployment",
+      "UnauthRoleName": "amplify-odkmimamori-prod-163123-unauthRole",
+      "StackName": "amplify-odkmimamori-prod-163123",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:667495032181:stack/amplify-odkmimamori-prod-163123/4a011100-8e5d-11ed-bafa-0688d43037dd",
+      "AmplifyAppId": "d1ch9bou9v85v9"
+    },
+    "categories": {
+      "auth": {
+        "odkmimamori8a6c148d": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1ch9bou9v85v9",
+          "type": "cicd"
+        }
+      }
+    }
   }
 }
