@@ -27,11 +27,13 @@ const App = () => {
   fetch('https://ipinfo.io?callback')
   .then(res => res.json())
   .then(json => {
-    console.log(json)
-    console.log(process.env.REACT_APP_IPWHITELIST)
-    if(json.ip != process.env.REACT_APP_IPWHITELIST){
-      window.location.href = `${window.location.href}/error`
+    const whitelist: string = process.env.REACT_APP_IPWHITELIST? process.env.REACT_APP_IPWHITELIST : ""
+    for(const ip of whitelist.split(",")){
+      if(json.ip == ip){
+        return
+      }
     }
+    window.location.href = `${window.location.href}/error`
   })
   }
   const Menu = {
