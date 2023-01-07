@@ -30,7 +30,7 @@ const App = () => {
     console.log(json)
     console.log(process.env.REACT_APP_IPWHITELIST)
     if(json.ip != process.env.REACT_APP_IPWHITELIST){
-      window.location.href = "https://dummy.co.jp"
+      window.location.href = `${window.location.href}/error`
     }
   })
   }
