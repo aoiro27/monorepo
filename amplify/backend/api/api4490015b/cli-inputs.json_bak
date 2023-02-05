@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/deliverystatus/{email}": {
+      "name": "/deliverystatus/{email}",
+      "lambdaFunction": "amplifyOdkmimamoriDeliveryStatus",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/registerstatus/{email}": {
+      "name": "/registerstatus/{email}",
+      "lambdaFunction": "amplifyOdkmimamoriRegisterStatus",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -20,6 +20,19 @@
       },
       "auth": {
         "odkmimamori8a6c148d": {}
+      },
+      "function": {
+        "amplifyOdkmimamoriDeliveryStatus": {
+          "deploymentBucketName": "amplify-odkmimamori-dev-33146-deployment",
+          "s3Key": "amplify-builds/amplifyOdkmimamoriDeliveryStatus-355a73524f366931786e-build.zip"
+        },
+        "amplifyOdkmimamoriRegisterStatus": {
+          "deploymentBucketName": "amplify-odkmimamori-dev-33146-deployment",
+          "s3Key": "amplify-builds/amplifyOdkmimamoriRegisterStatus-7730634e375564396570-build.zip"
+        }
+      },
+      "api": {
+        "api4490015b": {}
       }
     }
   }
