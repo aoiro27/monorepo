@@ -1,4 +1,5 @@
 import * as AWS from "aws-sdk";
+import { ItemList } from "aws-sdk/clients/dynamodb";
 import { ServiceConfigurationOptions } from "aws-sdk/lib/service";
 
 const serviceConfigOptions: ServiceConfigurationOptions = {
@@ -11,13 +12,11 @@ AWS.config.apiVersions = {
 
 AWS.config.update(serviceConfigOptions);
 
+// const tableName = "odk-mail-delivery-history-" + process.env.env;
 const tableName = "odk-mail-delivery-history-dev";
-// const tableName = "odk-mail-delivery-history-prod";
-
 const indexName = "deliveredEmail-deliveredTime-index";
 
 export class GetItemRepository {
-
   private documentClient: AWS.DynamoDB.DocumentClient;
 
   constructor(documentClient: AWS.DynamoDB.DocumentClient) {
@@ -29,37 +28,30 @@ export class GetItemRepository {
     search_from: string,
     search_to: string
   ): Promise<AWS.DynamoDB.DocumentClient.AttributeMap> {
-    // exp: string
-    // if (search_from != null && search_to != null){
-    //   exp = "deliveredEmail IN :key AND deliveredTime BETWEEN :from AND :to";
-    // } else if (search_from != null && search_to == null){
-    //   const exp = "deliveredEmail IN :key AND deliveredTime >= :from";
-    // } else if (search_from == null && search_to != null){
-    //   const exp = "deliveredEmail IN :key AND deliveredTime <= :to";
-    // } else {
-    //   const exp = "deliveredEmail IN :key";
-    // }
-    const params = {
+    console.log('search_key: ' + search_key);
+    console.log('search_from: ' + search_from);
+    console.log('search_to: ' + search_to);
+    let params: AWS.DynamoDB.DocumentClient.QueryInput = {
       TableName: tableName,
       IndexName: indexName,
-      KeyConditionExpression: "deliveredEmail IN :key AND deliveredTime BETWEEN :from AND :to",
+      KeyConditionExpression: "deliveredEmail = :key AND deliveredTime BETWEEN :from AND :to",
       ExpressionAttributeValues: {
-        "key": search_key,
-        "from": search_from,
-        "to": search_to,
+        ":key": search_key,
+        ":from": search_from,
+        ":to": search_to,
       },
-    };
-
+      ProjectionExpression: 'deliveredEmail, deliveredTime, stationName, biblleTagName'
+    }
     try {
-      const data = await this.documentClient.get(params).promise();
-      if (!data.Item) {
-        return data;
+      const data = await this.documentClient.query(params).promise();
+      if (data.Items) {
+        return data.Items;
       } else {
-        return data.Item;
+        return data;
       }
     } catch (e) {
       console.error(e);
-      throw new Error("Delivered history get operation is failed");
+      throw new Error("delivery history get operation is failed");
     }
   }
 }

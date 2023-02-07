@@ -10,6 +10,8 @@
     "@types/jquery": "^3.5.14",
     "@types/react-datepicker": "^4.4.2",
     "aws-amplify": "^4.3.39",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1309.0",
     "jquery": "^3.6.1",
     "react": "^18.2.0",
     "react-datepicker": "^4.8.0",
@@ -25,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write \"./src/**/*.{ts,tsx}\""
+    "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "amplify:amplifyOdkmimamoriDeliveryStatus": "cd amplify/backend/function/amplifyOdkmimamoriDeliveryStatus && tsc && cd -"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.110",
     "eslint": "^8.31.0",
     "prettier": "^2.8.2"
   }

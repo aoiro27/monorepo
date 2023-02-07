@@ -24,11 +24,11 @@
       "function": {
         "amplifyOdkmimamoriDeliveryStatus": {
           "deploymentBucketName": "amplify-odkmimamori-dev-33146-deployment",
-          "s3Key": "amplify-builds/amplifyOdkmimamoriDeliveryStatus-355a73524f366931786e-build.zip"
+          "s3Key": "amplify-builds/amplifyOdkmimamoriDeliveryStatus-714e5964524878734b47-build.zip"
         },
         "amplifyOdkmimamoriRegisterStatus": {
           "deploymentBucketName": "amplify-odkmimamori-dev-33146-deployment",
-          "s3Key": "amplify-builds/amplifyOdkmimamoriRegisterStatus-7730634e375564396570-build.zip"
+          "s3Key": "amplify-builds/amplifyOdkmimamoriRegisterStatus-38573433394972425a41-build.zip"
         }
       },
       "api": {

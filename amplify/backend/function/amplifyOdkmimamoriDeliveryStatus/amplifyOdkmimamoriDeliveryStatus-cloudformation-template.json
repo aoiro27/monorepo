@@ -43,7 +43,7 @@
             "Ref": "s3Key"
           }
         },
-        "Handler": "index.handler",
+        "Handler": "main.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
@@ -188,6 +188,14 @@
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "LambdaExecutionRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "LambdaExecutionRole",
+          "Arn"
+        ]
       }
     }
   }

@@ -1,40 +1,56 @@
 {
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2022-10-19T18:40:25.444Z"
+  "api": {
+    "api4490015b": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyOdkmimamoriDeliveryStatus"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyOdkmimamoriRegisterStatus"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
     "odkmimamori8a6c148d": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
     }
   },
-  "storage": {},
   "function": {
     "amplifyOdkmimamoriDeliveryStatus": {
       "build": true,
@@ -47,28 +63,62 @@
       "service": "Lambda"
     }
   },
-  "api": {
-    "api4490015b": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
+  "hosting": {
+    "amplifyhosting": {
+      "lastPushTimeStamp": "2022-10-19T18:40:25.444Z",
+      "service": "amplifyhosting",
+      "type": "cicd"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amplifyOdkmimamoriDeliveryStatus_deploymentBucketName": {
+      "usedBy": [
         {
           "category": "function",
-          "resourceName": "amplifyOdkmimamoriDeliveryStatus",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        },
+          "resourceName": "amplifyOdkmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyOdkmimamoriDeliveryStatus_s3Key": {
+      "usedBy": [
         {
           "category": "function",
-          "resourceName": "amplifyOdkmimamoriRegisterStatus",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
+          "resourceName": "amplifyOdkmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyOdkmimamoriRegisterStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyOdkmimamoriRegisterStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyOdkmimamoriRegisterStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyOdkmimamoriRegisterStatus"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
         }
       ]
     }
-  }
+  },
+  "storage": {}
 }
