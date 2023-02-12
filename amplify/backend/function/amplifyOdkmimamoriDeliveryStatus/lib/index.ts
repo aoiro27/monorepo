@@ -42,7 +42,6 @@ exports.handler = async (
         console.error(event)
         return {
             "statusCode": 400,
-            // "headers": {},
             "headers": {
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Origin": '*',
