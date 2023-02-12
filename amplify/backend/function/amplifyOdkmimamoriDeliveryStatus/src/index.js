@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.main = void 0;
 const Factory_1 = require("./Factory");
 /**
  * 配信メールアドレスと配信日時を条件に配信履歴を抽出
@@ -17,66 +16,66 @@ const Factory_1 = require("./Factory");
  * @param context
  * @returns
  */
-function main(event, context, dummy, getServiceItem) {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log(event);
-        console.log(event.queryStringParameters);
-        let deliveredEmail;
-        let deliveredTimeFrom; // YYYYMMDD
-        let deliveredTimeTo; // YYYYMMDD
-        const getItemService = injectDependency(getServiceItem);
-        try {
-            deliveredEmail = getDeliveredEmail(event);
-            deliveredTimeFrom = getDeliveredTimeFrom(event);
-            deliveredTimeTo = getDeliveredTimeTo(event);
-            // ValidationException回避対応（FROM-TOが逆転している場合は同じ日時にする）
-            if (deliveredTimeFrom && deliveredTimeTo && deliveredTimeFrom > deliveredTimeTo) {
-                deliveredTimeFrom = deliveredTimeTo;
-            }
+/**
+ * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+ */
+exports.handler = (event, context, dummy, getServiceItem) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(event);
+    console.log(event.queryStringParameters);
+    let deliveredEmail;
+    let deliveredTimeFrom; // YYYYMMDD
+    let deliveredTimeTo; // YYYYMMDD
+    const getItemService = injectDependency(getServiceItem);
+    try {
+        deliveredEmail = getDeliveredEmail(event);
+        deliveredTimeFrom = getDeliveredTimeFrom(event);
+        deliveredTimeTo = getDeliveredTimeTo(event);
+        // ValidationException回避対応（FROM-TOが逆転している場合は同じ日時にする）
+        if (deliveredTimeFrom && deliveredTimeTo && deliveredTimeFrom > deliveredTimeTo) {
+            deliveredTimeFrom = deliveredTimeTo;
         }
-        catch (e) {
-            console.error(event);
-            return {
-                "statusCode": 400,
-                // "headers": {},
-                "headers": {
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Origin": '*',
-                    "Access-Control-Allow-Methods": "OPTIONS,GET"
-                },
-                "body": JSON.stringify({ "msg": "Request Parameter is Invalid" }),
-                "isBase64Encoded": false
-            };
-        }
-        try {
-            let data = yield getItemService.getItem(deliveredEmail, deliveredTimeFrom, deliveredTimeTo);
-            console.log('data: ' + data);
-            return {
-                "statusCode": 200,
-                "headers": {
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Origin": '*',
-                    "Access-Control-Allow-Methods": "OPTIONS,GET"
-                },
-                "body": data,
-                "isBase64Encoded": false
-            };
-        }
-        catch (e) {
-            return {
-                "statusCode": 503,
-                "headers": {
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Origin": '*',
-                    "Access-Control-Allow-Methods": "OPTIONS,GET"
-                },
-                "body": JSON.stringify({ "msg": "Delivered history get operation is failed" }),
-                "isBase64Encoded": false
-            };
-        }
-    });
-}
-exports.main = main;
+    }
+    catch (e) {
+        console.error(event);
+        return {
+            "statusCode": 400,
+            // "headers": {},
+            "headers": {
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": '*',
+                "Access-Control-Allow-Methods": "OPTIONS,GET"
+            },
+            "body": JSON.stringify({ "msg": "Request Parameter is Invalid" }),
+            "isBase64Encoded": false
+        };
+    }
+    try {
+        let data = yield getItemService.getItem(deliveredEmail, deliveredTimeFrom, deliveredTimeTo);
+        console.log('data: ' + data);
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": '*',
+                "Access-Control-Allow-Methods": "OPTIONS,GET"
+            },
+            "body": data,
+            "isBase64Encoded": false
+        };
+    }
+    catch (e) {
+        return {
+            "statusCode": 503,
+            "headers": {
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": '*',
+                "Access-Control-Allow-Methods": "OPTIONS,GET"
+            },
+            "body": JSON.stringify({ "msg": "Delivered history get operation is failed" }),
+            "isBase64Encoded": false
+        };
+    }
+});
 function injectDependency(getItemService) {
     return getItemService !== null && getItemService !== void 0 ? getItemService : new Factory_1.Factory().getItemServiceInstance();
 }

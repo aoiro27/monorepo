@@ -24,7 +24,7 @@
       "function": {
         "amplifyOdkmimamoriDeliveryStatus": {
           "deploymentBucketName": "amplify-odkmimamori-dev-33146-deployment",
-          "s3Key": "amplify-builds/amplifyOdkmimamoriDeliveryStatus-714e5964524878734b47-build.zip"
+          "s3Key": "amplify-builds/amplifyOdkmimamoriDeliveryStatus-414f4e4341616848636a-build.zip"
         },
         "amplifyOdkmimamoriRegisterStatus": {
           "deploymentBucketName": "amplify-odkmimamori-dev-33146-deployment",

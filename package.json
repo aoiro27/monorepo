@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
-    "amplify:amplifyOdkmimamoriDeliveryStatus": "cd amplify/backend/function/amplifyOdkmimamoriDeliveryStatus && tsc && cd -"
+    "amplify:amplifyOdkmimamoriDeliveryStatus": "tsc"
   },
   "eslintConfig": {
     "extends": [
