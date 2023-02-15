@@ -96,7 +96,8 @@ function injectDependency2(getRegisterItemService?: GetRegisterItemService): Get
 }
 
 function getBiblleMailAddress(event: APIGatewayProxyEvent): string {
-    const biblleMailAddress = event?.pathParameters?.biblleMailAddress;
+    // const biblleMailAddress = event?.pathParameters?.biblleMailAddress;
+    const biblleMailAddress = event?.pathParameters?.email;
     if (biblleMailAddress == undefined) {
         throw new Error("biblleMailAddress is undefined");
     }
