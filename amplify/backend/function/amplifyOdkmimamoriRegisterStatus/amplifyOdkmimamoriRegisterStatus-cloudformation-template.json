@@ -147,7 +147,9 @@
                 "dynamodb:Scan",
                 "dynamodb:Query"
               ],
-              "Resource": ["*"]
+              "Resource": [
+                "*"
+              ]
             }
           ]
         }
