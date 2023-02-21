@@ -26,7 +26,7 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
-    "amplify:amplifyOdkmimamoriDeliveryStatus": "tsc"
+    "amplify:odkmimamoriDeliveryStatus": "tsc"
   },
   "eslintConfig": {
     "extends": [

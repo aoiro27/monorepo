@@ -41,8 +41,10 @@ AWS.config.apiVersions = {
     dynamodb: "2012-08-10",
 };
 AWS.config.update(serviceConfigOptions);
-// const tableName = "odk-mail-delivery-history-" + process.env.env;
-const tableName = "odk-mail-delivery-history-dev";
+// const t1 = process.env.TABLENAME;
+// const t2 = t1 && process.env.ENV;
+const tableName = "odk-mail-delivery-history-" + process.env.ENV;
+// const tableName = "odk-mail-delivery-history-dev";
 const indexName = "deliveredEmail-deliveredTime-index";
 class GetItemRepository {
     constructor(documentClient) {
@@ -54,6 +56,9 @@ class GetItemRepository {
             console.log('search_key: ' + search_key);
             console.log('search_from: ' + search_from);
             console.log('search_to: ' + search_to);
+            console.log('tableName: ' + tableName);
+            // console.log('t1: ' + t1);
+            // console.log('t2: ' + t2);
             let params = {
                 TableName: tableName,
                 IndexName: indexName,
