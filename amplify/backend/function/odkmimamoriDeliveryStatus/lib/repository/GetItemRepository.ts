@@ -12,7 +12,7 @@ AWS.config.apiVersions = {
 
 AWS.config.update(serviceConfigOptions);
 
-// const tableName = "odk-mail-delivery-history-" + process.env.env;
+// const tableName = "odk-mail-delivery-history-" + process.env.ENV;
 const tableName = "odk-mail-delivery-history-dev";
 const indexName = "deliveredEmail-deliveredTime-index";
 

@@ -11,7 +11,7 @@ AWS.config.apiVersions = {
 
 AWS.config.update(serviceConfigOptions);
 
-const tableName = "odk-mail-notification-" + process.env.env;
+const tableName = "odk-mail-notification-" + process.env.ENV;
 const indexName = "biblleMailAddress-index";
 
 export class GetRegisterItemRepository {
@@ -25,6 +25,7 @@ export class GetRegisterItemRepository {
     key: string
   ): Promise<AWS.DynamoDB.DocumentClient.AttributeMap> {
     console.log('GetRegisterItemRepository_key: ' + key)
+    console.log('tableName: ' + tableName)
     // const params = {
     //   TableName: tableName,
     //   IndexName: indexName,

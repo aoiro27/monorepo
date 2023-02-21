@@ -13,7 +13,7 @@ AWS.config.update(serviceConfigOptions);
 
 // const tableName = "odk-mail-user-info-dev";
 // const tableName = "odk-mail-user-info-prod";
-const tableName = "odk-mail-user-info-" + process.env.env;
+const tableName = "odk-mail-user-info-" + process.env.ENV;
 
 export class GetItemRepository {
   private documentClient: AWS.DynamoDB.DocumentClient;

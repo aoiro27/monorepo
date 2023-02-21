@@ -145,7 +145,8 @@
                 "logs:PutLogEvents",
                 "dynamodb:GetItem",
                 "dynamodb:Scan",
-                "dynamodb:Query"
+                "dynamodb:Query",
+                "ses:*"
               ],
               "Resource": [
                 "*"

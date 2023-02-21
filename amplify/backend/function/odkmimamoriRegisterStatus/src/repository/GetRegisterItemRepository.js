@@ -41,7 +41,7 @@ AWS.config.apiVersions = {
     dynamodb: "2012-08-10",
 };
 AWS.config.update(serviceConfigOptions);
-const tableName = "odk-mail-notification-" + process.env.env;
+const tableName = "odk-mail-notification-" + process.env.ENV;
 const indexName = "biblleMailAddress-index";
 class GetRegisterItemRepository {
     constructor(documentClient) {
@@ -51,6 +51,11 @@ class GetRegisterItemRepository {
     requestDynamoDB(key) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('GetRegisterItemRepository_key: ' + key);
+            console.log('tableName: ' + tableName);
+            console.log('process.env.ENV: ' + process.env.ENV);
+            console.log('process.env.REGION: ' + process.env.REGION);
+            let tableName2 = "odk-mail-notification-" + process.env.ENV;
+            console.log('tableName2: ' + tableName2);
             // const params = {
             //   TableName: tableName,
             //   IndexName: indexName,
