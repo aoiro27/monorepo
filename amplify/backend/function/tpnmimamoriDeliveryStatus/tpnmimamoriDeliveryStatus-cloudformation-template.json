@@ -50,12 +50,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "odkmimamoriDeliveryStatus",
+            "tpnmimamoriDeliveryStatus",
             {
               "Fn::Join": [
                 "",
                 [
-                  "odkmimamoriDeliveryStatus",
+                  "tpnmimamoriDeliveryStatus",
                   "-",
                   {
                     "Ref": "env"
@@ -95,12 +95,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "odkmimamoriLambdaRolea4bc007b",
+            "odkmimamoriLambdaRole43f74462",
             {
               "Fn::Join": [
                 "",
                 [
-                  "odkmimamoriLambdaRolea4bc007b",
+                  "odkmimamoriLambdaRole43f74462",
                   "-",
                   {
                     "Ref": "env"

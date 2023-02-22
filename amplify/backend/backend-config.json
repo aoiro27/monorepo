@@ -17,6 +17,14 @@
           ],
           "category": "function",
           "resourceName": "odkmimamoriRegisterStatus"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -61,6 +69,12 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "tpnmimamoriDeliveryStatus": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "hosting": {
@@ -72,6 +86,14 @@
   },
   "parameters": {
     "AMPLIFY_function_odkmimamoriDeliveryStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "odkmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_odkmimamoriDeliveryStatus_project": {
       "usedBy": [
         {
           "category": "function",
@@ -100,6 +122,30 @@
         {
           "category": "function",
           "resourceName": "odkmimamoriRegisterStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_tpnmimamoriDeliveryStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_tpnmimamoriDeliveryStatus_project": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_tpnmimamoriDeliveryStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
         }
       ]
     },

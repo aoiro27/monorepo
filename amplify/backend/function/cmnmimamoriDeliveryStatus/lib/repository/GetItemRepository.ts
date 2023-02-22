@@ -1,5 +1,5 @@
 import * as AWS from "aws-sdk";
-import { ItemList } from "aws-sdk/clients/dynamodb";
+// import { ItemList } from "aws-sdk/clients/dynamodb";
 import { ServiceConfigurationOptions } from "aws-sdk/lib/service";
 
 const serviceConfigOptions: ServiceConfigurationOptions = {
@@ -12,10 +12,7 @@ AWS.config.apiVersions = {
 
 AWS.config.update(serviceConfigOptions);
 
-// const t1 = process.env.TABLENAME;
-// const t2 = t1 && process.env.ENV;
-const tableName = "odk-mail-delivery-history-" + process.env.ENV;
-// const tableName = "odk-mail-delivery-history-dev";
+const tableName = process.env.PROJECT + "-delivery-history-" + process.env.ENV;
 const indexName = "deliveredEmail-deliveredTime-index";
 
 export class GetItemRepository {
@@ -34,8 +31,6 @@ export class GetItemRepository {
     console.log('search_from: ' + search_from);
     console.log('search_to: ' + search_to);
     console.log('tableName: ' + tableName);
-    // console.log('t1: ' + t1);
-    // console.log('t2: ' + t2);
     let params: AWS.DynamoDB.DocumentClient.QueryInput = {
       TableName: tableName,
       IndexName: indexName,
