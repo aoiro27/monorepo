@@ -21,20 +21,20 @@ import RegisterStatusSearch from './components/RegisterStatusSearch'
 Amplify.configure(aws_exports)
 
 const App = () => {
-
-  if(typeof process.env.REACT_APP_IPWHITELIST !== 'undefined'){
-  
-  fetch('https://ipinfo.io?callback')
-  .then(res => res.json())
-  .then(json => {
-    const whitelist: string = process.env.REACT_APP_IPWHITELIST? process.env.REACT_APP_IPWHITELIST : ""
-    for(const ip of whitelist.split(",")){
-      if(json.ip == ip){
-        return
-      }
-    }
-    window.location.href = `${window.location.href}/error`
-  })
+  if (typeof process.env.REACT_APP_IPWHITELIST !== 'undefined') {
+    fetch('https://ipinfo.io?callback')
+      .then(res => res.json())
+      .then(json => {
+        const whitelist: string = process.env.REACT_APP_IPWHITELIST
+          ? process.env.REACT_APP_IPWHITELIST
+          : ''
+        for (const ip of whitelist.split(',')) {
+          if (json.ip == ip) {
+            return
+          }
+        }
+        window.location.href = `${window.location.href}/error`
+      })
   }
   const Menu = {
     Nothing: 0,

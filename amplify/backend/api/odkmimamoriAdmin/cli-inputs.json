@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/deliverystatus": {
+      "name": "/deliverystatus",
+      "lambdaFunction": "odkmimamoriDeliveryStatus",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/registerstatus/{biblleMailAddress}": {
+      "name": "/registerstatus/{biblleMailAddress}",
+      "lambdaFunction": "odkmimamoriRegisterStatus",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/tpndeliverystatus": {
+      "name": "/tpndeliverystatus",
+      "lambdaFunction": "tpnmimamoriDeliveryStatus",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

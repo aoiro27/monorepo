@@ -1,37 +1,169 @@
 {
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2022-10-19T18:40:25.444Z"
+  "api": {
+    "odkmimamoriAdmin": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "odkmimamoriDeliveryStatus"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "odkmimamoriRegisterStatus"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
-    "odkmimamori8a6c148d": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
+    "odkmimamoriad08ba53": {
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "odkmimamoriDeliveryStatus": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "odkmimamoriRegisterStatus": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "tpnmimamoriDeliveryStatus": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "lastPushTimeStamp": "2022-10-19T18:40:25.444Z",
+      "service": "amplifyhosting",
+      "type": "cicd"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_odkmimamoriDeliveryStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "odkmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_odkmimamoriDeliveryStatus_project": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "odkmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_odkmimamoriDeliveryStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "odkmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_odkmimamoriRegisterStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "odkmimamoriRegisterStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_odkmimamoriRegisterStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "odkmimamoriRegisterStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_tpnmimamoriDeliveryStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_tpnmimamoriDeliveryStatus_project": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_tpnmimamoriDeliveryStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tpnmimamoriDeliveryStatus"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
     }
   }
 }
