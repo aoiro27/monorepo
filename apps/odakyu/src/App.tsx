@@ -14,9 +14,9 @@ import aws_exports from './aws-exports'
 
 import '@aws-amplify/ui-react/styles.css'
 import theme from './theme'
-import Header from './components/Header'
-import DeliveryStatusSearch from './components/DeliveryStatusSearch'
-import RegisterStatusSearch from './components/RegisterStatusSearch'
+import Header from '@commonlib/components/Header'
+import DeliveryStatusSearch from '@commonlib/components/DeliveryStatusSearch'
+import RegisterStatusSearch from '@commonlib/components/RegisterStatusSearch'
 
 Amplify.configure(aws_exports)
 

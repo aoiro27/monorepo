@@ -11,7 +11,7 @@ import {
 } from '@aws-amplify/ui-react'
 import { useState } from 'react'
 
-import './css/header.css'
+import '@commonlib/components/css/header.css'
 
 const Header = (props: any) => {
   return (

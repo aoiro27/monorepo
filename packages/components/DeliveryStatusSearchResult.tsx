@@ -17,7 +17,7 @@ import {
   Card,
 } from '@aws-amplify/ui-react'
 import { useState } from 'react'
-import { DeliveryStatusResult } from './types/DeliveryStatusResult'
+import { DeliveryStatusResult } from '@commonlib/components/types/DeliveryStatusResult'
 
 const DeliveryStatusSearchResult = (props: any) => {
   const [mailToggle, setMailToggle] = useState(true)

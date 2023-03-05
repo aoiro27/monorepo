@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import DeliveryStatusSearchResult from './DeliveryStatusSearchResult'
+import DeliveryStatusSearchResult from '@commonlib/components/DeliveryStatusSearchResult'
 import 'react-datepicker/dist/react-datepicker.css'
 import {
   Button,
