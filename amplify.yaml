@@ -1,0 +1,28 @@
+version: 1
+applications:
+  - appRoot: odakyu
+    frontend:
+      phases:
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: apps/odakyu/build
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+  - appRoot: toppan
+    frontend:
+      phases:
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: apps/toppan/build
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
